@@ -1,0 +1,133 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Fonts/FREELAH.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Fonts/LCD14.otf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 70
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 70
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 70
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 70
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 70
+font_data = ExtResource( 2 )
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 440.0
+margin_top = 20.0
+margin_right = 660.0
+margin_bottom = 900.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 220.0
+margin_bottom = 880.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NextShape" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 220.0
+margin_bottom = 160.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/NextShape"]
+margin_right = 220.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+custom_fonts/font = SubResource( 1 )
+text = "Next"
+align = 1
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/NextShape"]
+margin_left = 20.0
+margin_top = 60.0
+margin_right = 200.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 180, 100 )
+size_flags_horizontal = 6
+size_flags_vertical = 2
+
+[node name="PanelPosition" type="Position2D" parent="MarginContainer/VBoxContainer/NextShape/Panel"]
+position = Vector2( 90, 50 )
+
+[node name="Lines" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 256.0
+margin_right = 220.0
+margin_bottom = 623.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="Lines" type="Label" parent="MarginContainer/VBoxContainer/Lines"]
+margin_right = 220.0
+margin_bottom = 56.0
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 2 )
+text = "Lines"
+align = 1
+
+[node name="Score" type="Label" parent="MarginContainer/VBoxContainer/Lines"]
+margin_top = 60.0
+margin_right = 220.0
+margin_bottom = 152.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 3 )
+text = "0000"
+align = 1
+
+[node name="MostLines" type="Label" parent="MarginContainer/VBoxContainer/Lines"]
+margin_top = 156.0
+margin_right = 220.0
+margin_bottom = 271.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 4 )
+text = "Most
+Lines"
+align = 1
+
+[node name="Highscore" type="Label" parent="MarginContainer/VBoxContainer/Lines"]
+margin_top = 275.0
+margin_right = 220.0
+margin_bottom = 367.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 5 )
+text = "0000"
+align = 1
+
+[node name="Buttons" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 627.0
+margin_right = 220.0
+margin_bottom = 880.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pause" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons"]
+margin_right = 220.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MainMenu" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons"]
+margin_top = 128.0
+margin_right = 220.0
+margin_bottom = 253.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
