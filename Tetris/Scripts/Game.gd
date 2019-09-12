@@ -1,10 +1,12 @@
-extends Node2D
+ extends Node2D
 
 """Creates a board, adds shapes to it, finds and deletes full lines."""
 
 onready var spawner = $Spawner
 
-const BOARD_HEIGHT = 22
+"""Even though the board is 22 cells high, the two extra spaces allow the shapes
+to be rotated outside the top border of the board."""
+const BOARD_HEIGHT = 24
 const BOARD_WIDTH = 10
 const CELL_SIZE = 40
 
@@ -22,8 +24,8 @@ func shape_to_board(block_positions: Array) -> void:
 	for pos in block_positions:
 		board[pos.y / CELL_SIZE - 1][pos.x / CELL_SIZE - 1] = "[X]"
 	spawner.spawn()
-	print_board()
-	line_check()
+#	print_board()
+#	line_check()
 
 
 func line_check() -> void:
@@ -35,3 +37,4 @@ func line_check() -> void:
 func print_board() -> void:
 	for row in range(BOARD_HEIGHT):
 		print(board[row])
+	print(" ")

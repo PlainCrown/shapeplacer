@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Backgrounds/TetrisBackground.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/GridVisualizer.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/Spawner.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Shape.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Backgrounds/FrameOverlay.png" type="Texture" id=6]
-[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Backgrounds/FrameOverlay.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=6]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -27,11 +26,9 @@ script = ExtResource( 3 )
 [node name="Spawner" type="Node2D" parent="."]
 script = ExtResource( 4 )
 
-[node name="Shape" parent="Spawner" instance=ExtResource( 5 )]
-position = Vector2( 220, 60 )
-
 [node name="Frame" type="Sprite" parent="."]
-texture = ExtResource( 6 )
+z_index = 1
+texture = ExtResource( 5 )
 centered = false
 
-[node name="UI" parent="." instance=ExtResource( 7 )]
+[node name="UI" parent="." instance=ExtResource( 6 )]
