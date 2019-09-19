@@ -3,8 +3,8 @@
 [ext_resource path="res://Scripts/UI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/FREELAH.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://Assets/Fonts/LCD14.otf" type="DynamicFontData" id=3]
-[ext_resource path="res://Assets/UI/TetrisPause.png" type="Texture" id=4]
-[ext_resource path="res://Assets/UI/TetrisMenu.png" type="Texture" id=5]
+[ext_resource path="res://Assets/UI/tetris_pause.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/tetris_menu.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 70
@@ -129,6 +129,9 @@ size_flags_horizontal = 0
 size_flags_vertical = 3
 texture_normal = ExtResource( 4 )
 
+[node name="PauseTimer" type="Timer" parent="MarginContainer/VBoxContainer/Buttons/Pause"]
+wait_time = 2.0
+
 [node name="MainMenu" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons"]
 margin_top = 102.0
 margin_right = 180.0
@@ -137,3 +140,6 @@ rect_min_size = Vector2( 180, 90 )
 size_flags_horizontal = 0
 size_flags_vertical = 3
 texture_normal = ExtResource( 5 )
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Pause" to="." method="_on_Pause_pressed"]
+[connection signal="timeout" from="MarginContainer/VBoxContainer/Buttons/Pause/PauseTimer" to="." method="_on_PauseTimer_timeout"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/MainMenu" to="." method="_on_MainMenu_pressed"]

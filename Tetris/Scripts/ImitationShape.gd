@@ -1,13 +1,11 @@
 extends KinematicBody2D
 
 """Takes up the same space as Shape and is used to test if rotating Shape is safe.
-Please replace this abomination with a better solution if you can think of one."""
+Replace this abomination with a better solution if you can find one."""
 
-onready var real_shape = $".."
-onready var imitated_blocks = [$Block0, $Block1, $Block2, $Block3]
-onready var real_blocks = [$"../Block0", $"../Block1", $"../Block2", $"../Block3"]
-
-const CELL_SIZE = 40
+onready var real_shape: KinematicBody2D = $".."
+onready var imitated_blocks := [$Block0, $Block1, $Block2, $Block3]
+onready var real_blocks := [$"../Block0", $"../Block1", $"../Block2", $"../Block3"]
 
 
 func valid_imitation(new_rotation: int) -> bool:

@@ -21,7 +21,7 @@ position = Vector2( 20, 0 )
 position = Vector2( 60, 0 )
 
 [node name="DropTimer" type="Timer" parent="."]
-wait_time = 0.8
+wait_time = 0.9
 autostart = true
 
 [node name="ImitationShape" type="KinematicBody2D" parent="."]

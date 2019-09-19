@@ -2,8 +2,7 @@ extends Node2D
 
 """Spawns new shapes."""
 
-onready var game = $".."
-onready var spawn_pos = $"../UI/MarginContainer/VBoxContainer/NextShape/Panel/PanelPosition".global_position
+onready var spawn_pos: Position2D = $"../UI/MarginContainer/VBoxContainer/NextShape/Panel/PanelPosition".global_position
 
 const SHAPE = preload("res://Scenes/Shape.tscn")
 
