@@ -131,6 +131,7 @@ texture_normal = ExtResource( 4 )
 
 [node name="PauseTimer" type="Timer" parent="MarginContainer/VBoxContainer/Buttons/Pause"]
 wait_time = 2.0
+one_shot = true
 
 [node name="MainMenu" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons"]
 margin_top = 102.0

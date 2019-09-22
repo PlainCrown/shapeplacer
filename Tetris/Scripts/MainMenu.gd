@@ -16,7 +16,7 @@ func _ready() -> void:
 
 
 func _on_Start_pressed() -> void:
-	# changes to the first level scene when the start button is pressed
+	# changes to the game scene when the start button is pressed
 	get_tree().change_scene("res://Scenes/Game.tscn")
 
 
@@ -37,7 +37,7 @@ func _on_Exit_pressed() -> void:
 
 
 func _on_Sound_toggled(button_pressed: InputEventMouse) -> void:
-	# if toggled turns off all sound and music by setting the sound variable in autoload to false
+	# turns off all sound and music by setting the sound variable in autoload to false when toggled
 	if Autoload.sound == false:
 		Autoload.sound = true
 	else:

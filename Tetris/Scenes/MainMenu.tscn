@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Backgrounds/TetrisBackground.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/UI/controls_image.png" type="Texture" id=6]
 [ext_resource path="res://Assets/UI/exit_image.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Fonts/FREELAH.otf" type="DynamicFontData" id=8]
+[ext_resource path="res://Assets/UI/controls_page.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 120
@@ -79,8 +80,10 @@ text = "Made by:
 PlainCrown"
 
 [node name="ControlsPage" type="TextureRect" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
+texture = ExtResource( 9 )
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/Sound" to="." method="_on_Sound_toggled"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Controls" to="." method="_on_Controls_pressed"]
