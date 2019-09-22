@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ShapeDrop.wav-5e8fce3392d41fed5a320b8d4a8d816e.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/ShapeDrop.wav"
+dest_files=[ "res://.import/ShapeDrop.wav-5e8fce3392d41fed5a320b8d4a8d816e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
