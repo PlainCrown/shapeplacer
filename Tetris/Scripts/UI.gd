@@ -18,6 +18,7 @@ var pressed := 0
 var score := 0
 var ten_lines := 0
 var previous_ten_lines := 0
+var remainingDropTime := 0
 
 
 func _ready():
@@ -29,12 +30,14 @@ func _ready():
 func _on_Pause_pressed() -> void:
 	# pauses the game when pressed for the first time, continues it when pressed for the second time
 	pause.disabled = true
+	remainingDropTime = active_shape.drop_timer.wait_time
 	active_shape.active = false
 	pressed += 1
 	pause.texture_normal = UNPAUSE_RED_IMG
 	if pressed == 2:
 		pause.texture_normal = PAUSE_RED_IMG
 		active_shape.active = true
+		active_shape.drop_timer.wait_time = remainingDropTime
 		active_shape.drop()
 		pressed = 0
 	# starts a two second timer between pause button clicks to prevent errors and spam clicking
