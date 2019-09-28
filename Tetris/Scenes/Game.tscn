@@ -64,3 +64,9 @@ valign = 1
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 volume_db = -20.0
+
+[node name="PauseCover" type="Sprite" parent="."]
+position = Vector2( 220, 460 )
+scale = Vector2( 0.588235, 0.956522 )
+texture = ExtResource( 2 )
+[connection signal="changePauseState" from="UI" to="." method="_on_UI_changePauseState"]
