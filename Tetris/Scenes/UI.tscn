@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/UI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/FREELAH.otf" type="DynamicFontData" id=2]
@@ -26,12 +26,17 @@ font_data = ExtResource( 2 )
 size = 70
 font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=6]
+size = 70
+font_data = ExtResource( 3 )
+
 [node name="UI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+editor/display_folded = true
 margin_left = 440.0
 margin_top = 20.0
 margin_right = 660.0
@@ -141,6 +146,19 @@ rect_min_size = Vector2( 180, 90 )
 size_flags_horizontal = 0
 size_flags_vertical = 3
 texture_normal = ExtResource( 5 )
+
+[node name="Countdown" type="Label" parent="."]
+visible = false
+margin_left = 20.0
+margin_top = 700.0
+margin_right = 400.0
+margin_bottom = 901.0
+custom_fonts/font = SubResource( 6 )
+text = "5"
+align = 1
+
+[node name="Timer" type="Tween" parent="."]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Pause" to="." method="_on_Pause_pressed"]
 [connection signal="timeout" from="MarginContainer/VBoxContainer/Buttons/Pause/PauseTimer" to="." method="_on_PauseTimer_timeout"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="tween_completed" from="Timer" to="." method="_on_Timer_completed"]

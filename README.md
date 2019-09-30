@@ -9,8 +9,6 @@ The goal is to make a small game following the classic tetris formula while addi
 # Missing features and contributions
 
 Recommended features for contribution:
-* Make the pause button work by pressing spacebar
-* Add a visual 5 second counter that starts when the game ends to display that the game is restarting
 * Replace the block.gd script and block sprite sheet with custom colorization for each shape using the ColorPickerButton
 
 Features that I plan to implement:

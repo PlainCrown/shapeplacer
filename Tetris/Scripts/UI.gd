@@ -19,12 +19,14 @@ var score := 0
 var ten_lines := 0
 var previous_ten_lines := 0
 var remainingDropTime := 0
+
 signal changePauseState
 
 func _ready():
 	# displays the highscore when the game starts and hides the game over label
 	set_highscore()
 	over.hide()
+	$Countdown.hide()
 
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
@@ -88,5 +90,15 @@ func game_over() -> void:
 	# asks to check if a new highscore is reached, to show the game over label, and restarts the game after 5 sec
 	set_highscore()
 	over.show()
-	yield(get_tree().create_timer(5), "timeout")
+	pause.disabled = true
+	$Countdown.show()
+	$Timer.interpolate_method(self,"countDown",5,0,5,Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	$Timer.start()
+	
+func countDown(time):
+	#updates the countdown label
+	$Countdown.text = "%.2f" % time
+
+func _on_Timer_completed(object, key):
+	#gets called if timer is finised and restarts the scene
 	get_tree().change_scene("res://Scenes/Game.tscn")

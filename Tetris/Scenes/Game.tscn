@@ -2,10 +2,10 @@
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Backgrounds/TetrisBackground.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scripts/GridVisualizer.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/Spawner.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Backgrounds/FrameOverlay.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/GridVisualizer.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Spawner.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Backgrounds/FrameOverlay.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Fonts/FREELAH.otf" type="DynamicFontData" id=7]
 [ext_resource path="res://Assets/Sounds/ShapeDrop.wav" type="AudioStream" id=8]
 
@@ -26,8 +26,6 @@ __meta__ = {
 texture = ExtResource( 2 )
 centered = false
 
-[node name="UI" parent="." instance=ExtResource( 3 )]
-
 [node name="Grid" type="TileMap" parent="."]
 position = Vector2( 20, 20 )
 cell_size = Vector2( 40, 40 )
@@ -35,15 +33,17 @@ cell_quadrant_size = 22
 format = 1
 
 [node name="GridVisualizer" type="Node2D" parent="Grid"]
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 
 [node name="Spawner" type="Node2D" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 
 [node name="Frame" type="Sprite" parent="."]
 z_index = 1
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 centered = false
+
+[node name="UI" parent="." instance=ExtResource( 6 )]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 40.0
@@ -66,6 +66,7 @@ stream = ExtResource( 8 )
 volume_db = -20.0
 
 [node name="PauseCover" type="Sprite" parent="."]
+visible = false
 position = Vector2( 220, 460 )
 scale = Vector2( 0.588235, 0.956522 )
 texture = ExtResource( 2 )
