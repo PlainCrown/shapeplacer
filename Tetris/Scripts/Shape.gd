@@ -65,6 +65,8 @@ func drop() -> void:
 	# asks if the shape can be lowered and does so if possible
 	while active:
 		yield(drop_timer, "timeout")
+		if !active:
+			return;
 		if valid_position(Vector2.DOWN):
 			position.y += Autoload.CELL_SIZE
 		# stops the shape once it can't move any further

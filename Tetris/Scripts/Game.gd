@@ -20,6 +20,7 @@ func _ready() -> void:
 		board.append([])
 		for col in range(BOARD_WIDTH):
 			board[row].append("[ ]")
+	$PauseCover.hide()
 
 
 func shape_to_board(block_positions: Array) -> void:
@@ -68,3 +69,10 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 	if event.scancode == KEY_ESCAPE:
 		user_interface.set_highscore()
 		get_tree().change_scene("res://Scenes/MainMenu.tscn")
+
+
+func _on_UI_changePauseState(state):
+	if state:
+		$PauseCover.show()
+	else:
+		$PauseCover.hide()
