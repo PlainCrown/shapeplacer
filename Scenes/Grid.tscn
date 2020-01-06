@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/GridVisualizer.gd" type="Script" id=1]
+
+[node name="Grid" type="TileMap"]
+position = Vector2( 20, 20 )
+cell_size = Vector2( 40, 40 )
+cell_quadrant_size = 22
+format = 1
+
+[node name="GridVisualizer" type="Node2D" parent="."]
+script = ExtResource( 1 )

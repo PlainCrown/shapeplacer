@@ -1,0 +1,162 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scripts/UI.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Fonts/FREELAH.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Fonts/LCD14.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/UI/tetris_pause.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/tetris_menu.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 70
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 70
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 70
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 70
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 70
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 70
+font_data = ExtResource( 3 )
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 440.0
+margin_top = 20.0
+margin_right = 660.0
+margin_bottom = 908.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 220.0
+margin_bottom = 888.0
+size_flags_vertical = 2
+alignment = 1
+
+[node name="NextShape" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 220.0
+margin_bottom = 220.0
+rect_min_size = Vector2( 220, 220 )
+
+[node name="Next" type="Label" parent="MarginContainer/VBoxContainer/NextShape"]
+margin_right = 220.0
+margin_bottom = 96.0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+text = "Next"
+align = 1
+valign = 1
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/NextShape"]
+margin_left = 20.0
+margin_top = 100.0
+margin_right = 200.0
+margin_bottom = 220.0
+rect_min_size = Vector2( 180, 120 )
+size_flags_horizontal = 4
+
+[node name="PanelPosition" type="Position2D" parent="MarginContainer/VBoxContainer/NextShape/Panel"]
+position = Vector2( 70, 40 )
+
+[node name="LineTracker" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 224.0
+margin_right = 220.0
+margin_bottom = 684.0
+rect_min_size = Vector2( 220, 460 )
+custom_constants/separation = -10
+
+[node name="Lines" type="Label" parent="MarginContainer/VBoxContainer/LineTracker"]
+margin_right = 220.0
+margin_bottom = 103.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+custom_fonts/font = SubResource( 2 )
+text = "Lines"
+align = 1
+valign = 2
+
+[node name="Score" type="Label" parent="MarginContainer/VBoxContainer/LineTracker"]
+margin_top = 93.0
+margin_right = 220.0
+margin_bottom = 221.0
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 3 )
+text = "0000"
+align = 1
+
+[node name="MostLines" type="Label" parent="MarginContainer/VBoxContainer/LineTracker"]
+margin_top = 211.0
+margin_right = 220.0
+margin_bottom = 339.0
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 4 )
+text = "Most
+Lines"
+align = 1
+valign = 2
+
+[node name="Highscore" type="Label" parent="MarginContainer/VBoxContainer/LineTracker"]
+margin_top = 329.0
+margin_right = 220.0
+margin_bottom = 460.0
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 5 )
+text = "0000"
+align = 1
+
+[node name="Buttons" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_left = 20.0
+margin_top = 688.0
+margin_right = 200.0
+margin_bottom = 888.0
+rect_min_size = Vector2( 0, 200 )
+size_flags_horizontal = 4
+
+[node name="Pause" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons"]
+margin_right = 180.0
+margin_bottom = 98.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+texture_normal = ExtResource( 4 )
+
+[node name="PauseTimer" type="Timer" parent="MarginContainer/VBoxContainer/Buttons/Pause"]
+one_shot = true
+
+[node name="MainMenu" type="TextureButton" parent="MarginContainer/VBoxContainer/Buttons"]
+margin_top = 102.0
+margin_right = 180.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 180, 90 )
+size_flags_horizontal = 0
+size_flags_vertical = 3
+texture_normal = ExtResource( 5 )
+
+[node name="Countdown" type="Label" parent="."]
+visible = false
+margin_left = 20.0
+margin_top = 700.0
+margin_right = 400.0
+margin_bottom = 901.0
+custom_fonts/font = SubResource( 6 )
+text = "5"
+align = 1
+
+[node name="Timer" type="Tween" parent="."]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Pause" to="." method="_on_Pause_pressed"]
+[connection signal="timeout" from="MarginContainer/VBoxContainer/Buttons/Pause/PauseTimer" to="." method="_on_PauseTimer_timeout"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="tween_completed" from="Timer" to="." method="_on_Timer_completed"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/LineBreak.wav-ef3dab6e1e821513f81694b215326a5c.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/LineBreak.wav"
+dest_files=[ "res://.import/LineBreak.wav-ef3dab6e1e821513f81694b215326a5c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
