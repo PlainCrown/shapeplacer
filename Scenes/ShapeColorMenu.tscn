@@ -23,75 +23,75 @@ margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 3 )
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="UI" type="MarginContainer" parent="."]
 margin_left = 460.0
 margin_top = 40.0
 margin_right = 50.0
 margin_bottom = 880.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
 margin_right = 180.0
 margin_bottom = 840.0
 custom_constants/separation = 30
 alignment = 1
 
-[node name="I" type="ColorPickerButton" parent="MarginContainer/VBoxContainer"]
+[node name="I" type="ColorPickerButton" parent="UI/VBoxContainer"]
 margin_top = 28.0
 margin_right = 180.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 180, 60 )
 color = Color( 0.101961, 0.905882, 0.905882, 1 )
 
-[node name="L" type="ColorPickerButton" parent="MarginContainer/VBoxContainer"]
+[node name="L" type="ColorPickerButton" parent="UI/VBoxContainer"]
 margin_top = 118.0
 margin_right = 180.0
 margin_bottom = 178.0
 rect_min_size = Vector2( 180, 60 )
 color = Color( 0.101961, 0.376471, 0.905882, 1 )
 
-[node name="T" type="ColorPickerButton" parent="MarginContainer/VBoxContainer"]
+[node name="T" type="ColorPickerButton" parent="UI/VBoxContainer"]
 margin_top = 208.0
 margin_right = 180.0
 margin_bottom = 268.0
 rect_min_size = Vector2( 180, 60 )
 color = Color( 0.65, 0.1, 0.91, 1 )
 
-[node name="S" type="ColorPickerButton" parent="MarginContainer/VBoxContainer"]
+[node name="S" type="ColorPickerButton" parent="UI/VBoxContainer"]
 margin_top = 298.0
 margin_right = 180.0
 margin_bottom = 358.0
 rect_min_size = Vector2( 180, 60 )
 color = Color( 0.101961, 0.905882, 0.239216, 1 )
 
-[node name="O" type="ColorPickerButton" parent="MarginContainer/VBoxContainer"]
+[node name="O" type="ColorPickerButton" parent="UI/VBoxContainer"]
 margin_top = 388.0
 margin_right = 180.0
 margin_bottom = 448.0
 rect_min_size = Vector2( 180, 60 )
 color = Color( 0.905882, 0.882353, 0.101961, 1 )
 
-[node name="J" type="ColorPickerButton" parent="MarginContainer/VBoxContainer"]
+[node name="J" type="ColorPickerButton" parent="UI/VBoxContainer"]
 margin_top = 478.0
 margin_right = 180.0
 margin_bottom = 538.0
 rect_min_size = Vector2( 180, 60 )
 color = Color( 0.905882, 0.447059, 0.101961, 1 )
 
-[node name="Z" type="ColorPickerButton" parent="MarginContainer/VBoxContainer"]
+[node name="Z" type="ColorPickerButton" parent="UI/VBoxContainer"]
 margin_top = 568.0
 margin_right = 180.0
 margin_bottom = 628.0
 rect_min_size = Vector2( 180, 60 )
 color = Color( 0.905882, 0.101961, 0.239216, 1 )
 
-[node name="ResetButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+[node name="ResetButton" type="TextureButton" parent="UI/VBoxContainer"]
 margin_top = 658.0
 margin_right = 180.0
 margin_bottom = 720.0
 action_mode = 0
 texture_normal = ExtResource( 4 )
 
-[node name="BackButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+[node name="BackButton" type="TextureButton" parent="UI/VBoxContainer"]
 margin_top = 750.0
 margin_right = 180.0
 margin_bottom = 812.0
@@ -99,40 +99,40 @@ texture_normal = ExtResource( 5 )
 
 [node name="Grid" parent="." instance=ExtResource( 6 )]
 
-[node name="ShapeContainer" type="Node2D" parent="."]
+[node name="AudioPlayer" type="Node2D" parent="."]
 
-[node name="Shape0" parent="ShapeContainer" instance=ExtResource( 7 )]
+[node name="Shape0" parent="AudioPlayer" instance=ExtResource( 7 )]
 position = Vector2( 200.279, 880 )
 
-[node name="Shape1" parent="ShapeContainer" instance=ExtResource( 7 )]
+[node name="Shape1" parent="AudioPlayer" instance=ExtResource( 7 )]
 position = Vector2( 320, 760 )
 shape = 1
 
-[node name="Shape2" parent="ShapeContainer" instance=ExtResource( 7 )]
+[node name="Shape2" parent="AudioPlayer" instance=ExtResource( 7 )]
 position = Vector2( 360, 800 )
 shape = 2
 
-[node name="Shape3" parent="ShapeContainer" instance=ExtResource( 7 )]
+[node name="Shape3" parent="AudioPlayer" instance=ExtResource( 7 )]
 position = Vector2( 120.279, 840 )
 shape = 3
 
-[node name="Shape4" parent="ShapeContainer" instance=ExtResource( 7 )]
+[node name="Shape4" parent="AudioPlayer" instance=ExtResource( 7 )]
 position = Vector2( 160.279, 720 )
 shape = 4
 
-[node name="Shape5" parent="ShapeContainer" instance=ExtResource( 7 )]
+[node name="Shape5" parent="AudioPlayer" instance=ExtResource( 7 )]
 position = Vector2( 160, 800 )
 shape = 5
 
-[node name="Shape6" parent="ShapeContainer" instance=ExtResource( 7 )]
+[node name="Shape6" parent="AudioPlayer" instance=ExtResource( 7 )]
 position = Vector2( 320, 840 )
 shape = 6
-[connection signal="color_changed" from="MarginContainer/VBoxContainer/I" to="." method="_on_I_color_changed"]
-[connection signal="color_changed" from="MarginContainer/VBoxContainer/L" to="." method="_on_L_color_changed"]
-[connection signal="color_changed" from="MarginContainer/VBoxContainer/T" to="." method="_on_T_color_changed"]
-[connection signal="color_changed" from="MarginContainer/VBoxContainer/S" to="." method="_on_S_color_changed"]
-[connection signal="color_changed" from="MarginContainer/VBoxContainer/O" to="." method="_on_O_color_changed"]
-[connection signal="color_changed" from="MarginContainer/VBoxContainer/J" to="." method="_on_J_color_changed"]
-[connection signal="color_changed" from="MarginContainer/VBoxContainer/Z" to="." method="_on_Z_color_changed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ResetButton" to="." method="_on_ResetButton_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="color_changed" from="UI/VBoxContainer/I" to="." method="_on_I_color_changed"]
+[connection signal="color_changed" from="UI/VBoxContainer/L" to="." method="_on_L_color_changed"]
+[connection signal="color_changed" from="UI/VBoxContainer/T" to="." method="_on_T_color_changed"]
+[connection signal="color_changed" from="UI/VBoxContainer/S" to="." method="_on_S_color_changed"]
+[connection signal="color_changed" from="UI/VBoxContainer/O" to="." method="_on_O_color_changed"]
+[connection signal="color_changed" from="UI/VBoxContainer/J" to="." method="_on_J_color_changed"]
+[connection signal="color_changed" from="UI/VBoxContainer/Z" to="." method="_on_Z_color_changed"]
+[connection signal="pressed" from="UI/VBoxContainer/ResetButton" to="." method="_on_ResetButton_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]

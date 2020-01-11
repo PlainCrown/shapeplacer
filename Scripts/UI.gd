@@ -18,25 +18,23 @@ var pressed := 0
 var score := 0
 var ten_lines := 0
 var previous_ten_lines := 0
-var remaining_drop_time := 0
 
 signal changePauseState
 
 
 func _ready():
-	# displays the highscore when the game starts and hides the game over label
-	set_highscore()
+	most_lines.text = "%04d" % Autoload.highscore
 
 
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
 		_on_Pause_pressed()
 
+
 func _on_Pause_pressed() -> void:
 	if not pause.disabled:
 		# pauses the game when pressed for the first time, continues it when pressed for the second time
 		pause.disabled = true
-		remaining_drop_time = active_shape.drop_timer.wait_time
 		active_shape.active = false
 		emit_signal("changePauseState", true)
 		pressed += 1
@@ -45,8 +43,8 @@ func _on_Pause_pressed() -> void:
 			pause.texture_normal = PAUSE_RED_IMG
 			active_shape.active = true
 			emit_signal("changePauseState", false)
-			active_shape.drop_timer.wait_time = remaining_drop_time
-			active_shape.drop()
+			active_shape.drop_timer.wait_time = Autoload.shape_drop_speed
+			active_shape.drop_timer.start()
 			pressed = 0
 		# starts a two second timer between pause button clicks to prevent errors and spam clicking
 		pause_timer.start()
@@ -63,7 +61,6 @@ func _on_PauseTimer_timeout() -> void:
 
 func _on_MainMenu_pressed() -> void:
 	# asks to check if a new highscore is reached and switches to the main menu scene
-	set_highscore()
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 
@@ -77,10 +74,7 @@ func set_score(lines) -> void:
 		previous_ten_lines = ten_lines
 	ten_lines = 0
 	line_count.text = "%04d" % score
-
-
-func set_highscore() -> void:
-	# updates the most lines label if the current line count is higher than the previous best
+	"""Updates the high score if the previous high score is beaten."""
 	if Autoload.highscore < score:
 		Autoload.highscore = score
 	most_lines.text = "%04d" % Autoload.highscore
@@ -88,19 +82,18 @@ func set_highscore() -> void:
 
 func game_over() -> void:
 	# asks to check if a new highscore is reached, to show the game over label, and restarts the game after 5 sec
-	set_highscore()
 	over.show()
 	pause.disabled = true
 	$Countdown.show()
-	$Timer.interpolate_method(self,"countDown",5,0,5,Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	$Timer.interpolate_method(self, "count_down", 5, 0, 5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Timer.start()
 
 
-func countDown(time):
+func count_down(time) -> void:
 	# updates the countdown label
 	$Countdown.text = "%.2f" % time
 
 
-func _on_Timer_completed(object, key):
+func _on_Timer_completed(object, key) -> void:
 	# gets called if timer is finised and restarts the scene
 	get_tree().change_scene("res://Scenes/Game.tscn")

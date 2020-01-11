@@ -2,12 +2,12 @@ extends Control
 
 """Controls the functionality of all the buttons in the shape color menu."""
 
-onready var color_shape_array := [$ShapeContainer/Shape0, $ShapeContainer/Shape1, $ShapeContainer/Shape2,
-$ShapeContainer/Shape3, $ShapeContainer/Shape4, $ShapeContainer/Shape5, $ShapeContainer/Shape6]
+onready var color_shape_array := [$AudioPlayer/Shape0, $AudioPlayer/Shape1, $AudioPlayer/Shape2,
+$AudioPlayer/Shape3, $AudioPlayer/Shape4, $AudioPlayer/Shape5, $AudioPlayer/Shape6]
 
-onready var color_picker_array := [$MarginContainer/VBoxContainer/I, $MarginContainer/VBoxContainer/L, 
-$MarginContainer/VBoxContainer/T, $MarginContainer/VBoxContainer/S, $MarginContainer/VBoxContainer/O, 
-$MarginContainer/VBoxContainer/J, $MarginContainer/VBoxContainer/Z]
+onready var color_picker_array := [$UI/VBoxContainer/I, $UI/VBoxContainer/L, 
+$UI/VBoxContainer/T, $UI/VBoxContainer/S, $UI/VBoxContainer/O, 
+$UI/VBoxContainer/J, $UI/VBoxContainer/Z]
 
 
 func _ready() -> void:

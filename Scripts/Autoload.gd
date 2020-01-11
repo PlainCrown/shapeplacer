@@ -17,6 +17,7 @@ const DEFAULT_COLOR_DIC = {
 var music_player := AudioStreamPlayer.new()
 var shape_drop_speed := 1.04
 var highscore := 0
+var last_shape_pos := []
 
 var music_volume := -10 setget music_volume_change
 var sfx_volume := -20 setget sfx_volume_change

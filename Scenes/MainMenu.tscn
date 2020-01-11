@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Backgrounds/TetrisBackground.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/UI/exit_image.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Fonts/FREELAH.otf" type="DynamicFontData" id=7]
 [ext_resource path="res://Assets/UI/controls_page.png" type="Texture" id=8]
+[ext_resource path="res://Assets/UI/back_image.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 90
@@ -17,17 +18,27 @@ font_data = ExtResource( 7 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_left = 140.0
 margin_top = 162.0
 margin_right = -140.0
 margin_bottom = -52.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_right = 400.0
@@ -64,6 +75,9 @@ margin_bottom = 136.566
 custom_fonts/font = SubResource( 1 )
 text = "ShapePlacer"
 align = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="MadeBy" type="Label" parent="."]
 margin_left = 592.0
@@ -72,13 +86,31 @@ margin_right = 662.0
 margin_bottom = 900.0
 text = "Made by:
 PlainCrown"
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="ControlsPage" type="TextureRect" parent="."]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ControlsBack" type="TextureButton" parent="."]
+visible = false
+margin_left = 140.0
+margin_top = 730.0
+margin_right = 540.0
+margin_bottom = 868.0
+texture_normal = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Controls" to="." method="_on_Controls_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="ControlsBack" to="." method="_on_ControlsBack_pressed"]

@@ -20,8 +20,7 @@ position = Vector2( 20, 0 )
 position = Vector2( 60, 0 )
 
 [node name="DropTimer" type="Timer" parent="."]
-wait_time = 0.9
-autostart = true
+wait_time = 1.04
 
 [node name="ImitationShape" type="KinematicBody2D" parent="."]
 script = ExtResource( 3 )
@@ -41,3 +40,4 @@ disabled = true
 [node name="Block3" parent="ImitationShape" instance=ExtResource( 2 )]
 visible = false
 disabled = true
+[connection signal="timeout" from="DropTimer" to="." method="_on_DropTimer_timeout"]

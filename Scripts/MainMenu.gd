@@ -2,7 +2,8 @@ extends Control
 
 """Controls the functionality of all the buttons on the main menu screen."""
 
-onready var controls_page: TextureRect = $ControlsPage
+onready var controls_page := $ControlsPage
+onready var controls_back := $ControlsBack
 
 
 func _ready() -> void:
@@ -21,16 +22,24 @@ func _on_Options_pressed() -> void:
 
 
 func _on_Controls_pressed() -> void:
-	# shows the controls page
+	"""Shows the controls page."""
+	controls_back.show()
 	controls_page.show()
+
+
+func _on_ControlsBack_pressed() -> void:
+	"""Exits the game select menu when the back button is clicked."""
+	controls_back.hide()
+	controls_page.hide()
+
+
+func _unhandled_key_input(event: InputEventKey) -> void:
+	"""Exits the game select menu when the escape key is pressed."""
+	if event.scancode == KEY_ESCAPE:
+		controls_back.hide()
+		controls_page.hide()
 
 
 func _on_Exit_pressed() -> void:
 	# closes the game window when the exit button is pressed
 	get_tree().quit()
-
-
-func _unhandled_key_input(event: InputEventKey) -> void:
-	# hides the controls page when escape is pressed
-	if event.scancode == KEY_ESCAPE:
-		controls_page.hide()

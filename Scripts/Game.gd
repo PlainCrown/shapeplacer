@@ -15,6 +15,7 @@ var game_over := false
 
 
 func _ready() -> void:
+	Autoload.shape_drop_speed = 1.04
 	# creates the game board
 	for row in range(BOARD_HEIGHT):
 		board.append([])
@@ -67,7 +68,6 @@ func row_check() -> void:
 func _unhandled_key_input(event: InputEventKey) -> void:
 	# asks to check if a new highscore is reached and returns to the main menu when escape is pressed
 	if event.scancode == KEY_ESCAPE:
-		user_interface.set_highscore()
 		get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 

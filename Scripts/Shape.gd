@@ -3,9 +3,9 @@ extends KinematicBody2D
 """Responsible for moving, changing, and deleting shapes. Also, sound effects."""
 
 onready var drop_timer: Timer = $DropTimer
+onready var imitation: KinematicBody2D = $ImitationShape
 onready var game: Node2D = $"../.."
 onready var user_interface: Control = $"../../UI"
-onready var imitation: KinematicBody2D = $ImitationShape
 onready var audio_player: AudioStreamPlayer2D = $"../../AudioPlayer"
 
 const SHAPE_DROP_SOUND = preload("res://Assets/Sounds/ShapeDrop.wav")
@@ -25,11 +25,13 @@ export(int, "I", "L", "T", "S", "O", "J", "Z") var shape setget change_shape
 var active := false
 var rotations := 0
 var blocks := []
+var block_positions := []
 
 
 func _ready() -> void:
 	# sets the drop timer and creates an array consisting of all shape's blocks
 	z_index = 1
+	Autoload.last_shape_pos = []
 	drop_timer.wait_time = Autoload.shape_drop_speed
 	blocks = [$Block0, $Block1, $Block2, $Block3]
 
@@ -37,9 +39,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# gives player control over the active shape and asks if the shape can be moved or rotated
 	if active:
-		if Input.is_action_pressed("ui_down"):
+		if Input.is_action_just_pressed("ui_down"):
 			drop_timer.wait_time = 0.04
-		else:
+			drop_timer.start()
+		elif Input.is_action_just_released("ui_down"):
 			drop_timer.wait_time = Autoload.shape_drop_speed
 		if Input.is_action_just_pressed("ui_left"):
 			if valid_position(Vector2.LEFT):
@@ -55,19 +58,27 @@ func activate() -> void:
 	# repositions and activates the shape locked in the "next" box, asks to drop the shape
 	z_index = 0
 	position = Vector2(200, 40)
-	active = true
-	drop()
+	for block in blocks:
+		if block.global_position in Autoload.last_shape_pos:
+			position = Vector2(200, 0)
+			game.game_over = true
+			for block in blocks:
+				if block.global_position in Autoload.last_shape_pos:
+					position = Vector2(200, -40)
+	if game.game_over:
+		user_interface.game_over()
+		# asks to play the game over sound effect
+		audio_player.stream = GAME_OVER_SOUND
+		audio_player.play()
+	else:
+		active = true
+		user_interface.active_shape = self
+		drop_timer.start()
 
 
-func drop() -> void:
+func _on_DropTimer_timeout() -> void:
 	# drops the current active shape, stops its movement, and checks if the game is over
-	user_interface.active_shape = self
-	var block_positions := []
-	# asks if the shape can be lowered and does so if possible
-	while active:
-		yield(drop_timer, "timeout")
-		if not active:
-			return
+	if active:
 		if valid_position(Vector2.DOWN):
 			position.y += Autoload.CELL_SIZE
 		# stops the shape once it can't move any further
@@ -75,20 +86,15 @@ func drop() -> void:
 			active = false
 			drop_timer.stop()
 			add_to_group("dropped_shapes")
-			# asks to play the shape drop sound effect
-			audio_player.stream = SHAPE_DROP_SOUND
-			audio_player.play()
-			# checks if the game is over and asks to display the game over label if true
-			if self.position == Vector2(200, 40):
-				game.game_over = true
-				user_interface.game_over()
-				# asks to play the game over sound effect
-				audio_player.stream = GAME_OVER_SOUND
-				audio_player.play()
 			# asks the game script to add the shape to the game board
 			for block in blocks:
 				block_positions.append(block.global_position)
+			Autoload.last_shape_pos = block_positions
 			game.shape_to_board(block_positions)
+			# asks to play the shape drop sound effect
+			if audio_player.stream != GAME_OVER_SOUND:
+				audio_player.stream = SHAPE_DROP_SOUND
+				audio_player.play()
 
 
 func valid_position(direction: Vector2, block_array: Array = blocks) -> bool:
@@ -143,7 +149,7 @@ func delete_rows(rows: Array) -> void:
 	audio_player.play()
 	# deletes shapes that don't have any blocks left
 	if blocks.empty():
-		self.queue_free()
+		queue_free()
 		return
 	# lowers the shapes that remain above the removed rows
 	for block in blocks:
