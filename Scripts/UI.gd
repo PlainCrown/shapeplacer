@@ -2,11 +2,11 @@ extends Control
 
 """Controls the in-game user interface in the right sidebar."""
 
-onready var pause: Label = $MarginContainer/VBoxContainer/Buttons/Pause
-onready var pause_timer: Timer = $MarginContainer/VBoxContainer/Buttons/Pause/PauseTimer
-onready var line_count: Label = $MarginContainer/VBoxContainer/LineTracker/Score
-onready var most_lines: Label = $MarginContainer/VBoxContainer/LineTracker/Highscore
-onready var over: Label = $"../MarginContainer/GameOver"
+onready var pause := $MarginContainer/VBoxContainer/Buttons/Pause
+onready var pause_timer = $MarginContainer/VBoxContainer/Buttons/Pause/PauseTimer
+onready var line_count := $MarginContainer/VBoxContainer/LineTracker/Score
+onready var most_lines := $MarginContainer/VBoxContainer/LineTracker/Highscore
+onready var pause_cover := $PauseCover
 
 const PAUSE_IMG = preload("res://Assets/UI/tetris_pause.png")
 const PAUSE_RED_IMG = preload("res://Assets/UI/tetris_pause_red.png")
@@ -14,36 +14,27 @@ const UNPAUSE_IMG = preload("res://Assets/UI/tetris_unpause.png")
 const UNPAUSE_RED_IMG = preload("res://Assets/UI/tetris_unpause_red.png")
 
 var active_shape: KinematicBody2D
-var pressed := 0
 var score := 0
-
-signal changePauseState
 
 
 func _ready():
 	most_lines.text = "%04d" % Autoload.highscore
 
 
-func _process(delta):
-	if Input.is_action_just_pressed("pause"):
-		_on_Pause_pressed()
-
-
 func _on_Pause_pressed() -> void:
 	if not pause.disabled:
 		# pauses the game when pressed for the first time, continues it when pressed for the second time
 		pause.disabled = true
-		active_shape.active = false
-		emit_signal("changePauseState", true)
-		pressed += 1
-		pause.texture_normal = UNPAUSE_RED_IMG
-		if pressed == 2:
+		if pause.texture_normal == PAUSE_IMG:
+			active_shape.active = false
+			pause_cover.show()
+			pause.texture_normal = UNPAUSE_RED_IMG
+		else:
+			pause_cover.hide()
 			pause.texture_normal = PAUSE_RED_IMG
 			active_shape.active = true
-			emit_signal("changePauseState", false)
 			active_shape.drop_timer.wait_time = Autoload.shape_drop_speed
 			active_shape.drop_timer.start()
-			pressed = 0
 		# starts a two second timer between pause button clicks to prevent errors and spam clicking
 		pause_timer.start()
 
@@ -63,7 +54,9 @@ func _on_Restart_pressed() -> void:
 
 func _unhandled_key_input(event: InputEventKey) -> void:
 	"""Calls the restart function when R is pressed and informs the player that the game is restarting."""
-	if event.scancode == KEY_R and event.pressed:
+	if event.scancode == KEY_SPACE:
+		_on_Pause_pressed()
+	elif event.scancode == KEY_R and event.pressed:
 		get_tree().change_scene("res://Scenes/Game.tscn")
 	elif event.scancode == KEY_ESCAPE:
 		get_tree().change_scene("res://Scenes/MainMenu.tscn")
@@ -74,7 +67,7 @@ func _on_MainMenu_pressed() -> void:
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 
-func set_score(lines) -> void:
+func set_score(lines: int) -> void:
 	# updates the line counter and increases the shape drop speed by 0.01 sec per 10 lines
 	score += lines
 	if Autoload.shape_drop_speed != 0.04:
@@ -91,18 +84,4 @@ func set_score(lines) -> void:
 
 func game_over() -> void:
 	# asks to check if a new highscore is reached, to show the game over label, and restarts the game after 5 sec
-	over.show()
 	pause.disabled = true
-	$Countdown.show()
-	$Timer.interpolate_method(self, "count_down", 5, 0, 5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Timer.start()
-
-
-func count_down(time) -> void:
-	# updates the countdown label
-	$Countdown.text = "%.2f" % time
-
-
-func _on_Timer_completed(object, key) -> void:
-	# gets called if timer is finised and restarts the scene
-	get_tree().change_scene("res://Scenes/Game.tscn")

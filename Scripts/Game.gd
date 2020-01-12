@@ -21,7 +21,6 @@ func _ready() -> void:
 		board.append([])
 		for col in range(BOARD_WIDTH):
 			board[row].append("[ ]")
-	$PauseCover.hide()
 
 
 func shape_to_board(block_positions: Array) -> void:
@@ -63,10 +62,3 @@ func row_check() -> void:
 							board[row + full_rows.size()][col] = "[X]"
 		# asks for the line count to be updated
 		user_interface.set_score(full_rows.size())
-
-
-func _on_UI_changePauseState(state: bool) -> void:
-	if state:
-		$PauseCover.show()
-	else:
-		$PauseCover.hide()

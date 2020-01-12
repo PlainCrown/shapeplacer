@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Backgrounds/TetrisBackground.png" type="Texture" id=2]
@@ -6,14 +6,7 @@
 [ext_resource path="res://Scripts/Spawner.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Backgrounds/FrameOverlay.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Fonts/FREELAH.otf" type="DynamicFontData" id=7]
-[ext_resource path="res://Assets/Sounds/ShapeDrop.wav" type="AudioStream" id=8]
-
-[sub_resource type="DynamicFont" id=1]
-size = 150
-outline_size = 2
-outline_color = Color( 0.694118, 0.694118, 0.694118, 1 )
-font_data = ExtResource( 7 )
+[ext_resource path="res://Assets/Sounds/ShapeDrop.wav" type="AudioStream" id=7]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -38,29 +31,6 @@ centered = false
 
 [node name="UI" parent="." instance=ExtResource( 6 )]
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 440, 920 )
-
-[node name="GameOver" type="Label" parent="MarginContainer"]
-visible = false
-margin_top = 339.0
-margin_right = 440.0
-margin_bottom = 580.0
-custom_fonts/font = SubResource( 1 )
-text = "Game
-Over"
-align = 1
-valign = 1
-
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+stream = ExtResource( 7 )
 volume_db = -20.0
-
-[node name="PauseCover" type="Sprite" parent="."]
-visible = false
-position = Vector2( 220, 460 )
-scale = Vector2( 0.588235, 0.956522 )
-texture = ExtResource( 2 )
-[connection signal="changePauseState" from="UI" to="." method="_on_UI_changePauseState"]
