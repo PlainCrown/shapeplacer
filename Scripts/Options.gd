@@ -53,7 +53,12 @@ func _on_ShowGridCheck_toggled(button_pressed: InputEventMouse) -> void:
 	Autoload.show_grid = !Autoload.show_grid
 
 
-func _on_InvisibleCheck_toggled(button_pressed):
+func _on_FastModeCheck_toggled(button_pressed: InputEventMouse) -> void:
+	"""Turns the fast mode on and off."""
+	Autoload.fast_mode = !Autoload.fast_mode
+
+
+func _on_InvisibleCheck_toggled(button_pressed: InputEventMouse) -> void:
 	"""Turns invisble mode on and off."""
 	Autoload.invisible_mode = !Autoload.invisible_mode
 

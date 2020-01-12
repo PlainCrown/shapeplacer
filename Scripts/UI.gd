@@ -16,8 +16,6 @@ const UNPAUSE_RED_IMG = preload("res://Assets/UI/tetris_unpause_red.png")
 var active_shape: KinematicBody2D
 var pressed := 0
 var score := 0
-var ten_lines := 0
-var previous_ten_lines := 0
 
 signal changePauseState
 
@@ -79,17 +77,16 @@ func _on_MainMenu_pressed() -> void:
 func set_score(lines) -> void:
 	# updates the line counter and increases the shape drop speed by 0.01 sec per 10 lines
 	score += lines
-	for ten in range(floor(score / 10)):
-		ten_lines += 1
-	if ten_lines > 0 and ten_lines > previous_ten_lines:
-		Autoload.shape_drop_speed = 1.04 - ten_lines * 0.01
-		previous_ten_lines = ten_lines
-	ten_lines = 0
+	if Autoload.shape_drop_speed != 0.04:
+		if Autoload.fast_mode:
+			Autoload.shape_drop_speed = 1.04 - score * 0.01
+		else:
+			Autoload.shape_drop_speed = 1.04 - floor(score / 10) * 0.01
 	line_count.text = "%04d" % score
 	"""Updates the high score if the previous high score is beaten."""
 	if Autoload.highscore < score:
 		Autoload.highscore = score
-	most_lines.text = "%04d" % Autoload.highscore
+		most_lines.text = "%04d" % Autoload.highscore
 
 
 func game_over() -> void:
