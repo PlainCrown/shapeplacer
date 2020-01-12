@@ -59,6 +59,18 @@ func _on_PauseTimer_timeout() -> void:
 		pause.texture_normal = PAUSE_IMG
 
 
+func _on_Restart_pressed() -> void:
+	get_tree().change_scene("res://Scenes/Game.tscn")
+
+
+func _unhandled_key_input(event: InputEventKey) -> void:
+	"""Calls the restart function when R is pressed and informs the player that the game is restarting."""
+	if event.scancode == KEY_R and event.pressed:
+		get_tree().change_scene("res://Scenes/Game.tscn")
+	elif event.scancode == KEY_ESCAPE:
+		get_tree().change_scene("res://Scenes/MainMenu.tscn")
+
+
 func _on_MainMenu_pressed() -> void:
 	# asks to check if a new highscore is reached and switches to the main menu scene
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")

@@ -1,11 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Options.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Backgrounds/TetrisBackground.png" type="Texture" id=2]
 [ext_resource path="res://Assets/UI/label_font_theme.tres" type="Theme" id=3]
-[ext_resource path="res://Assets/UI/shape_color_button.png" type="Texture" id=4]
-[ext_resource path="res://Assets/UI/back_image.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Sounds/LineBreak.wav" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Fonts/FREELAH.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/UI/shape_color_button.png" type="Texture" id=5]
+[ext_resource path="res://Assets/UI/back_image.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sounds/LineBreak.wav" type="AudioStream" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 4 )
 
 [node name="Options" type="Control"]
 anchor_right = 1.0
@@ -24,7 +29,7 @@ margin_right = 540.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_right = 400.0
-margin_bottom = 636.0
+margin_bottom = 680.0
 
 [node name="MusicLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 margin_right = 400.0
@@ -53,17 +58,24 @@ margin_bottom = 352.0
 theme = ExtResource( 3 )
 text = "Show Grid"
 
-[node name="ShapeColorButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+[node name="InvisibleModeLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 margin_top = 356.0
 margin_right = 400.0
-margin_bottom = 494.0
-texture_normal = ExtResource( 4 )
+margin_bottom = 396.0
+custom_fonts/font = SubResource( 1 )
+text = "Invisible mode"
+
+[node name="ShapeColorButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+margin_top = 400.0
+margin_right = 400.0
+margin_bottom = 538.0
+texture_normal = ExtResource( 5 )
 
 [node name="BackButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
-margin_top = 498.0
+margin_top = 542.0
 margin_right = 400.0
-margin_bottom = 636.0
-texture_normal = ExtResource( 5 )
+margin_bottom = 680.0
+texture_normal = ExtResource( 6 )
 
 [node name="MusicSlider" type="HSlider" parent="."]
 margin_left = 300.0
@@ -104,12 +116,20 @@ margin_bottom = 437.0
 rect_scale = Vector2( 2.2, 2.2 )
 pressed = true
 
+[node name="InvisibleCheck" type="CheckBox" parent="."]
+margin_left = 499.0
+margin_top = 480.0
+margin_right = 523.0
+margin_bottom = 504.0
+rect_scale = Vector2( 2.2, 2.2 )
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource( 7 )
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ShapeColorButton" to="." method="_on_ShapeColorButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="value_changed" from="MusicSlider" to="." method="_on_MusicSlider_value_changed"]
 [connection signal="value_changed" from="SFXSlider" to="." method="_on_SFXSlider_value_changed"]
 [connection signal="toggled" from="FullscreenCheck" to="." method="_on_FullscreenCheck_toggled"]
 [connection signal="toggled" from="ShowGridCheck" to="." method="_on_ShowGridCheck_toggled"]
+[connection signal="toggled" from="InvisibleCheck" to="." method="_on_InvisibleCheck_toggled"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]

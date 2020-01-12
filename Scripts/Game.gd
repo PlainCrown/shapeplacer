@@ -65,12 +65,6 @@ func row_check() -> void:
 		user_interface.set_score(full_rows.size())
 
 
-func _unhandled_key_input(event: InputEventKey) -> void:
-	# asks to check if a new highscore is reached and returns to the main menu when escape is pressed
-	if event.scancode == KEY_ESCAPE:
-		get_tree().change_scene("res://Scenes/MainMenu.tscn")
-
-
 func _on_UI_changePauseState(state: bool) -> void:
 	if state:
 		$PauseCover.show()

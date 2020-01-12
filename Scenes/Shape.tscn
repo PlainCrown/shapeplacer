@@ -40,4 +40,6 @@ disabled = true
 [node name="Block3" parent="ImitationShape" instance=ExtResource( 2 )]
 visible = false
 disabled = true
+
+[node name="InvisibleTween" type="Tween" parent="."]
 [connection signal="timeout" from="DropTimer" to="." method="_on_DropTimer_timeout"]

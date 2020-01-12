@@ -6,6 +6,7 @@ onready var music_slider := $MusicSlider
 onready var sfx_slider := $SFXSlider
 onready var fullscreen_check := $FullscreenCheck
 onready var show_grid_check := $ShowGridCheck
+onready var invisible_check := $InvisibleCheck
 onready var audio_player := $AudioStreamPlayer
 
 var playing := true
@@ -17,6 +18,7 @@ func _ready() -> void:
 	sfx_slider.value = Autoload.sfx_volume
 	fullscreen_check.pressed = Autoload.fullscreen
 	show_grid_check.pressed = Autoload.show_grid
+	invisible_check.pressed = Autoload.invisible_mode
 	"""Prevents the sound effect test sound from playing as soon as the options menu is opened."""
 	playing = false
 
@@ -51,14 +53,9 @@ func _on_ShowGridCheck_toggled(button_pressed: InputEventMouse) -> void:
 	Autoload.show_grid = !Autoload.show_grid
 
 
-func _on_HeadColor_color_changed(color: Color) -> void:
-	"""Changes the color of the snake head."""
-	Autoload.head_color = color
-
-
-func _on_TailColor_color_changed(color: Color) -> void:
-	"""Changes the color of the snake tail."""
-	Autoload.tail_color = color
+func _on_InvisibleCheck_toggled(button_pressed):
+	"""Turns invisble mode on and off."""
+	Autoload.invisible_mode = !Autoload.invisible_mode
 
 
 func _on_ShapeColorButton_pressed() -> void:

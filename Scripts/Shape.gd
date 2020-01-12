@@ -2,8 +2,9 @@ extends KinematicBody2D
 
 """Responsible for moving, changing, and deleting shapes. Also, sound effects."""
 
-onready var drop_timer: Timer = $DropTimer
-onready var imitation: KinematicBody2D = $ImitationShape
+onready var drop_timer := $DropTimer
+onready var imitation := $ImitationShape
+onready var invisible_tween := $InvisibleTween
 onready var game: Node2D = $"../.."
 onready var user_interface: Control = $"../../UI"
 onready var audio_player: AudioStreamPlayer2D = $"../../AudioPlayer"
@@ -70,6 +71,9 @@ func activate() -> void:
 		# asks to play the game over sound effect
 		audio_player.stream = GAME_OVER_SOUND
 		audio_player.play()
+		for shape in get_tree().get_nodes_in_group("dropped_shapes"):
+			shape.invisible_tween.stop_all()
+			shape.modulate = Color(1, 1, 1, 1)
 	else:
 		active = true
 		user_interface.active_shape = self
@@ -86,6 +90,9 @@ func _on_DropTimer_timeout() -> void:
 			active = false
 			drop_timer.stop()
 			add_to_group("dropped_shapes")
+			if Autoload.invisible_mode:
+				invisible_tween.interpolate_property(self, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+				invisible_tween.start()
 			# asks the game script to add the shape to the game board
 			for block in blocks:
 				block_positions.append(block.global_position)
