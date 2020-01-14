@@ -2,8 +2,7 @@ extends Node2D
 
 """Spawns new shapes."""
 
-onready var top_spawn_pos: Vector2 = $"../UI/MarginContainer/VBoxContainer/NextShape/Panel/TopPanelPos".global_position
-onready var bottom_spawn_pos: Vector2 = $"../UI/MarginContainer/VBoxContainer/NextShape/Panel/BottomPanelPos".global_position
+onready var spawn_pos: Vector2 = $"../UI/MarginContainer/VBoxContainer/NextShape/Panel/SpawnPos".global_position
 
 const SHAPE = preload("res://Scenes/Shape.tscn")
 
@@ -22,7 +21,7 @@ func _ready() -> void:
 func spawn() -> void:
 	# spawns new shapes
 	if last_shape:
-		last_shape.position = top_spawn_pos
+		last_shape.position -= Vector2(0, 120)
 	# if the current shape is not the first shape, asks to activate the shape in the "next" box
 	if not second_shape:
 		next_shape.activate()
@@ -31,7 +30,10 @@ func spawn() -> void:
 	var new_shape := randi() % 7
 	add_child(shape)
 	shape.shape = new_shape
-	shape.position = bottom_spawn_pos
+	if new_shape == 0 or new_shape == 4:
+		shape.position = spawn_pos - Vector2(20, 0)
+	else:
+		shape.position = spawn_pos
 	next_shape = last_shape
 	last_shape = shape
 	# if the current shape is the first shape of the game, asks to spawn another shape

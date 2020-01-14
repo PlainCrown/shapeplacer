@@ -7,6 +7,7 @@ onready var pause_timer = $MarginContainer/VBoxContainer/Buttons/Pause/PauseTime
 onready var line_count := $MarginContainer/VBoxContainer/LineTracker/Score
 onready var most_lines := $MarginContainer/VBoxContainer/LineTracker/Highscore
 onready var pause_cover := $PauseCover
+onready var game_over := $GameOverLabel
 
 const PAUSE_IMG = preload("res://Assets/UI/tetris_pause.png")
 const PAUSE_RED_IMG = preload("res://Assets/UI/tetris_pause_red.png")
@@ -85,3 +86,4 @@ func set_score(lines: int) -> void:
 func game_over() -> void:
 	# asks to check if a new highscore is reached, to show the game over label, and restarts the game after 5 sec
 	pause.disabled = true
+	game_over.show()

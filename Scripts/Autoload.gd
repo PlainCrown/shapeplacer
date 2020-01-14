@@ -43,7 +43,7 @@ func _ready() -> void:
 	get_viewport().get_node("/root").call_deferred("add_child", music_player)
 	music_player.stream = music_file
 	music_player.volume_db = music_volume
-	music_player.play()
+#	music_player.play()
 
 
 func music_volume_change(value: int) -> void:

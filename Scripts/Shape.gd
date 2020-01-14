@@ -31,7 +31,6 @@ var block_positions := []
 
 func _ready() -> void:
 	# sets the drop timer and creates an array consisting of all shape's blocks
-	z_index = 1
 	Autoload.last_shape_pos = []
 	drop_timer.wait_time = Autoload.shape_drop_speed
 	blocks = [$Block0, $Block1, $Block2, $Block3]
@@ -57,7 +56,6 @@ func _physics_process(delta: float) -> void:
 
 func activate() -> void:
 	# repositions and activates the shape locked in the "next" box, asks to drop the shape
-	z_index = 0
 	position = Vector2(200, 40)
 	for block in blocks:
 		if block.global_position in Autoload.last_shape_pos:
@@ -91,7 +89,7 @@ func _on_DropTimer_timeout() -> void:
 			drop_timer.stop()
 			add_to_group("dropped_shapes")
 			if Autoload.invisible_mode:
-				invisible_tween.interpolate_property(self, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+				invisible_tween.interpolate_property(self, "modulate:a", 1, 0, 2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 				invisible_tween.start()
 			# asks the game script to add the shape to the game board
 			for block in blocks:
