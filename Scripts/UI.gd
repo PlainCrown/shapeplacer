@@ -2,10 +2,12 @@ extends Control
 
 """Controls the in-game user interface in the right sidebar."""
 
-onready var pause := $MarginContainer/VBoxContainer/Buttons/Pause
-onready var pause_timer = $MarginContainer/VBoxContainer/Buttons/Pause/PauseTimer
+onready var fast_mode := $MarginContainer/VBoxContainer/LineTracker/FastLabel
+onready var invisible_mode := $MarginContainer/VBoxContainer/LineTracker/InvisibleLabel
 onready var line_count := $MarginContainer/VBoxContainer/LineTracker/Score
 onready var most_lines := $MarginContainer/VBoxContainer/LineTracker/Highscore
+onready var pause := $MarginContainer/VBoxContainer/Buttons/Pause
+onready var pause_timer = $MarginContainer/VBoxContainer/Buttons/Pause/PauseTimer
 onready var pause_cover := $PauseCover
 onready var game_over := $GameOverLabel
 
@@ -20,6 +22,10 @@ var score := 0
 
 func _ready():
 	most_lines.text = "%04d" % Autoload.highscore
+	if Autoload.fast_mode:
+		fast_mode.show()
+	if Autoload.invisible_mode:
+		invisible_mode.show()
 
 
 func _on_Pause_pressed() -> void:

@@ -21,7 +21,7 @@ func _ready() -> void:
 func spawn() -> void:
 	# spawns new shapes
 	if last_shape:
-		last_shape.position -= Vector2(0, 120)
+		last_shape.position -= Vector2(0, 100)
 	# if the current shape is not the first shape, asks to activate the shape in the "next" box
 	if not second_shape:
 		next_shape.activate()
