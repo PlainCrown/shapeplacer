@@ -6,6 +6,7 @@ onready var music_slider := $MusicSlider
 onready var sfx_slider := $SFXSlider
 onready var fullscreen_check := $FullscreenCheck
 onready var show_grid_check := $ShowGridCheck
+onready var fast_check := $FastCheck
 onready var invisible_check := $InvisibleCheck
 onready var audio_player := $AudioStreamPlayer
 
@@ -18,6 +19,7 @@ func _ready() -> void:
 	sfx_slider.value = Autoload.sfx_volume
 	fullscreen_check.pressed = Autoload.fullscreen
 	show_grid_check.pressed = Autoload.show_grid
+	fast_check.pressed = Autoload.fast_mode
 	invisible_check.pressed = Autoload.invisible_mode
 	"""Prevents the sound effect test sound from playing as soon as the options menu is opened."""
 	playing = false
@@ -69,12 +71,12 @@ func _on_ShapeColorButton_pressed() -> void:
 
 func _on_BackButton_pressed():
 	"""Exits the options menu when the back button is clicked."""
-#	Autoload.save_config()
+	Autoload.save_config()
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:
 	"""Exits the options menu when the escape key is pressed."""
 	if event.scancode == KEY_ESCAPE and event.pressed:
-#		Autoload.save_config()
+		Autoload.save_config()
 		get_tree().change_scene("res://Scenes/MainMenu.tscn")

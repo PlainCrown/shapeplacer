@@ -124,7 +124,7 @@ margin_bottom = 387.0
 rect_scale = Vector2( 2.2, 2.2 )
 pressed = true
 
-[node name="FastModeCheck" type="CheckBox" parent="."]
+[node name="FastCheck" type="CheckBox" parent="."]
 margin_left = 499.0
 margin_top = 451.0
 margin_right = 523.0
@@ -146,6 +146,6 @@ stream = ExtResource( 7 )
 [connection signal="value_changed" from="SFXSlider" to="." method="_on_SFXSlider_value_changed"]
 [connection signal="toggled" from="FullscreenCheck" to="." method="_on_FullscreenCheck_toggled"]
 [connection signal="toggled" from="ShowGridCheck" to="." method="_on_ShowGridCheck_toggled"]
-[connection signal="toggled" from="FastModeCheck" to="." method="_on_FastModeCheck_toggled"]
+[connection signal="toggled" from="FastCheck" to="." method="_on_FastModeCheck_toggled"]
 [connection signal="toggled" from="InvisibleCheck" to="." method="_on_InvisibleCheck_toggled"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]

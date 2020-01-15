@@ -18,15 +18,18 @@ const UNPAUSE_RED_IMG = preload("res://Assets/UI/tetris_unpause_red.png")
 
 var active_shape: KinematicBody2D
 var score := 0
+var game_type := 1
 
 
 func _ready():
 	most_lines.text = "%04d" % Autoload.highscore
 	if Autoload.fast_mode:
+		game_type += 1
 		fast_mode.show()
 	if Autoload.invisible_mode:
+		game_type += 2
 		invisible_mode.show()
-
+	most_lines.text = "%04d" % Autoload.highscore_dictionary[game_type]
 
 func _on_Pause_pressed() -> void:
 	if not pause.disabled:
@@ -87,6 +90,10 @@ func set_score(lines: int) -> void:
 	if Autoload.highscore < score:
 		Autoload.highscore = score
 		most_lines.text = "%04d" % Autoload.highscore
+	"""Updates the high score if the previous high score is beaten."""
+	if score > Autoload.highscore_dictionary[game_type]:
+		Autoload.highscore_dictionary[game_type] = score
+		most_lines.text = "%04d" % score
 
 
 func game_over() -> void:
