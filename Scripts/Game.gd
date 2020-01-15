@@ -47,6 +47,8 @@ func row_check() -> void:
 	if not full_rows.empty():
 		# asks dropped shapes to delete blocks from full rows
 		get_tree().call_group("dropped_shapes", "delete_rows", full_rows)
+		if Autoload.invisible_mode:
+			get_tree().call_group("dropped_shapes", "appear")
 		# lowers unfilled rows that are above the deleted rows
 		for row in range(21, 0, -1):
 			if row < full_rows.max() - 1 and not row + 1 in full_rows:

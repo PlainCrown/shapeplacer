@@ -167,3 +167,9 @@ func delete_rows(rows: Array) -> void:
 				block.global_position.y += Autoload.CELL_SIZE * 2
 			else:
 				block.global_position.y += Autoload.CELL_SIZE * rows.size()
+
+
+func appear() -> void:
+	modulate.a = 1
+	invisible_tween.interpolate_property(self, "modulate:a", 1, 0, 2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	invisible_tween.start()
