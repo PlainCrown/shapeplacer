@@ -6,6 +6,10 @@
 
 [node name="Shape" type="KinematicBody2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Block0" parent="." instance=ExtResource( 2 )]
 position = Vector2( -60, 0 )

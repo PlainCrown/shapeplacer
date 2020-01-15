@@ -7,6 +7,10 @@ position = Vector2( 20, 20 )
 cell_size = Vector2( 40, 40 )
 cell_quadrant_size = 22
 format = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="GridVisualizer" type="Node2D" parent="."]
 script = ExtResource( 1 )

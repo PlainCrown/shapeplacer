@@ -9,6 +9,10 @@ extents = Vector2( 20, 20 )
 [node name="Block" type="CollisionShape2D"]
 shape = SubResource( 1 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="BlockSprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

@@ -17,6 +17,7 @@ _global_script_class_icons={
 
 config/name="ShapePlacer"
 run/main_scene="res://Scenes/MainMenu.tscn"
+config/icon="res://Assets/Icons/project_icon.png"
 
 [autoload]
 

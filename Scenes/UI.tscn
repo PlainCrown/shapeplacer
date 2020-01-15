@@ -8,23 +8,23 @@
 [ext_resource path="res://Assets/UI/tetris_restart.png" type="Texture" id=6]
 [ext_resource path="res://Assets/UI/tetris_menu.png" type="Texture" id=7]
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=1]
 size = 34
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 60
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=3]
 size = 50
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 60
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 70
 outline_size = 2
 outline_color = Color( 0.145098, 0.145098, 0.164706, 1 )
@@ -34,18 +34,28 @@ font_data = ExtResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="PauseCover" type="TextureRect" parent="."]
 visible = false
 margin_right = 680.0
 margin_bottom = 920.0
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_left = 440.0
 margin_top = 20.0
 margin_right = 660.0
 margin_bottom = 900.0
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_right = 220.0
@@ -84,7 +94,7 @@ visible = false
 margin_right = 220.0
 margin_bottom = 44.0
 rect_min_size = Vector2( 0, 44 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 text = "Fast"
 align = 1
 
@@ -93,7 +103,7 @@ visible = false
 margin_right = 220.0
 margin_bottom = 44.0
 rect_min_size = Vector2( 0, 44 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 text = "Invisible"
 align = 1
 
@@ -103,7 +113,7 @@ margin_bottom = 48.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_vertical = 0
 size_flags_stretch_ratio = 0.8
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Lines"
 align = 1
 valign = 2
@@ -112,7 +122,7 @@ valign = 2
 margin_top = 48.0
 margin_right = 220.0
 margin_bottom = 114.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 3 )
 text = "0000"
 align = 1
 
@@ -122,7 +132,7 @@ margin_right = 220.0
 margin_bottom = 244.0
 rect_min_size = Vector2( 0, 130 )
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Most
 Lines"
 align = 1
@@ -133,7 +143,7 @@ margin_top = 244.0
 margin_right = 220.0
 margin_bottom = 324.0
 rect_min_size = Vector2( 0, 80 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 3 )
 text = "0000"
 align = 1
 
@@ -188,8 +198,11 @@ margin_left = 40.0
 margin_top = 45.0
 margin_right = 402.0
 margin_bottom = 101.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "Game over"
+__meta__ = {
+"_edit_lock_": true
+}
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Pause" to="." method="_on_Pause_pressed"]
 [connection signal="timeout" from="MarginContainer/VBoxContainer/Buttons/Pause/PauseTimer" to="." method="_on_PauseTimer_timeout"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Restart" to="." method="_on_Restart_pressed"]
