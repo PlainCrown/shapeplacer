@@ -44,22 +44,26 @@ func _on_AudioStreamPlayer_finished() -> void:
 	playing = false
 
 
+# warning-ignore:unused_argument
 func _on_FullscreenCheck_toggled(button_pressed: InputEventMouse) -> void:
 	"""Switches the fullscreen mode on and off."""
 	OS.window_fullscreen = !OS.window_fullscreen
 	Autoload.fullscreen = !Autoload.fullscreen
 
 
+# warning-ignore:unused_argument
 func _on_ShowGridCheck_toggled(button_pressed: InputEventMouse) -> void:
 	"""Turns the grid on and off."""
 	Autoload.show_grid = !Autoload.show_grid
 
 
+# warning-ignore:unused_argument
 func _on_FastModeCheck_toggled(button_pressed: InputEventMouse) -> void:
 	"""Turns the fast mode on and off."""
 	Autoload.fast_mode = !Autoload.fast_mode
 
 
+# warning-ignore:unused_argument
 func _on_InvisibleCheck_toggled(button_pressed: InputEventMouse) -> void:
 	"""Turns invisble mode on and off."""
 	Autoload.invisible_mode = !Autoload.invisible_mode
@@ -67,12 +71,14 @@ func _on_InvisibleCheck_toggled(button_pressed: InputEventMouse) -> void:
 
 func _on_ShapeColorButton_pressed() -> void:
 	"""Opens the shape color menu."""
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/ShapeColorMenu.tscn")
 
 
 func _on_BackButton_pressed() -> void:
 	"""Exits the options menu when the back button is clicked."""
 	Autoload.save_config()
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 
@@ -80,4 +86,5 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 	"""Exits the options menu when the escape key is pressed."""
 	if event.scancode == KEY_ESCAPE and event.pressed:
 		Autoload.save_config()
+# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Scenes/MainMenu.tscn")

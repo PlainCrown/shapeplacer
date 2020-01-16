@@ -20,6 +20,7 @@ const DEFAULT_COLOR_DIC = {
 	6: Color(0.91, 0.1, 0.24, 1)}
 
 var music_player := AudioStreamPlayer.new()
+# warning-ignore:unused_class_variable
 var shape_drop_speed := DEFAULT_SHAPE_DROP_SPEED
 
 """Variables saved to config.ini"""

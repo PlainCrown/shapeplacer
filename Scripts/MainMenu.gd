@@ -8,11 +8,13 @@ onready var controls_back := $ControlsBack
 
 func _on_Start_pressed() -> void:
 	"""Starts the game."""
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/Game.tscn")
 
 
 func _on_Options_pressed() -> void:
 	"""Opens the options menu."""
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/Options.tscn")
 
 

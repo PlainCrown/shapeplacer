@@ -64,6 +64,7 @@ func _on_PauseTimer_timeout() -> void:
 
 func _on_Restart_pressed() -> void:
 	"""Restarts the game."""
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/Game.tscn")
 
 
@@ -72,13 +73,16 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 	if event.scancode == KEY_SPACE:
 		_on_Pause_pressed()
 	elif event.scancode == KEY_R and event.pressed:
+# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Scenes/Game.tscn")
 	elif event.scancode == KEY_ESCAPE:
+# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 
 func _on_MainMenu_pressed() -> void:
 	"""Returns to the main menu."""
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 
@@ -89,6 +93,7 @@ func set_score(lines: int) -> void:
 		if Autoload.fast_mode:
 			Autoload.shape_drop_speed = Autoload.DEFAULT_SHAPE_DROP_SPEED - score * 0.01
 		else:
+# warning-ignore:integer_division
 			Autoload.shape_drop_speed = Autoload.DEFAULT_SHAPE_DROP_SPEED - floor(score / 10) * 0.01
 	line_count.text = "%04d" % score
 	
@@ -98,7 +103,7 @@ func set_score(lines: int) -> void:
 		most_lines.text = "%04d" % score
 
 
-func game_over() -> void:
+func game_over_func() -> void:
 	"""Disables the pause button and shows the game over label."""
 	pause.disabled = true
 	game_over.show()

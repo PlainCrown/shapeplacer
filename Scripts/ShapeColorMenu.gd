@@ -80,10 +80,12 @@ func change() -> void:
 
 func _on_BackButton_pressed() -> void:
 	"""Exits the shape color menu when the back button is clicked."""
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/Options.tscn")
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:
 	"""Exits the shape color menu when the escape key is pressed."""
 	if event.scancode == KEY_ESCAPE and event.pressed:
+# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Scenes/Options.tscn")

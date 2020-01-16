@@ -21,6 +21,7 @@ func _ready() -> void:
 	"""Creates the game board."""
 	for row in range(BOARD_HEIGHT):
 		board.append([])
+# warning-ignore:unused_variable
 		for col in range(BOARD_WIDTH):
 			board[row].append("[ ]")
 

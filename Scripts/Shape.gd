@@ -35,6 +35,7 @@ func _ready() -> void:
 	blocks = [$Block0, $Block1, $Block2, $Block3]
 
 
+# warning-ignore:unused_argument
 func _physics_process(delta: float) -> void:
 	"""Allows the player to move and rotate the shape while it's active."""
 	if active:
@@ -70,7 +71,7 @@ func activate() -> void:
 	
 	"""Tells the user interface to run the game over function and plays the game over sound effect."""
 	if game.game_over:
-		user_interface.game_over()
+		user_interface.game_over_func()
 		audio_player.stream = GAME_OVER_SOUND
 		audio_player.play()
 		
