@@ -15,8 +15,10 @@ var game_over := false
 
 
 func _ready() -> void:
-	Autoload.shape_drop_speed = 1.04
-	# creates the game board
+	"""Resets the shape drop speed to the default speed."""
+	Autoload.shape_drop_speed = Autoload.DEFAULT_SHAPE_DROP_SPEED
+	
+	"""Creates the game board."""
 	for row in range(BOARD_HEIGHT):
 		board.append([])
 		for col in range(BOARD_WIDTH):
@@ -24,43 +26,47 @@ func _ready() -> void:
 
 
 func shape_to_board(block_positions: Array) -> void:
-	# turns filled Vector2 positions into filled board positions
+	"""Turns Vector2 positions that contain blocks into X on the game board."""
 	for pos in block_positions:
 		board[pos.y / Autoload.CELL_SIZE - 1][pos.x / Autoload.CELL_SIZE - 1] = "[X]"
-	# asks to spawn a new shape and asks to check if any rows are full 
+	
+	"""Requests to spawn a new shape and to check if any of the rows are full."""
 	if not game_over:
 		spawner.spawn()
 		row_check()
 
 
 func row_check() -> void:
-	# finds and deletes full rows, then lowers unfilled rows
-	
-	# finds full rows, empties them from the board
+	"""Searches for full rows and removes them from the game board."""
 	var full_rows := []
 	for row in BOARD_HEIGHT:
 		if not "[ ]" in board[row]:
 			full_rows.append(row + 1)
 			for col in BOARD_WIDTH:
 				board[row][col] = "[ ]"
-	# if full rows are found
+	
+	"""Tells the shapes that have dropped to delete any blocks within the full rows."""
 	if not full_rows.empty():
-		# asks dropped shapes to delete blocks from full rows
 		get_tree().call_group("dropped_shapes", "delete_rows", full_rows)
+		
+		"""If the invisible mode is on, this makes the dropped shapes visible when lines are filled."""
 		if Autoload.invisible_mode:
 			get_tree().call_group("dropped_shapes", "appear")
-		# lowers unfilled rows that are above the deleted rows
+		
+		"""Lowers unfilled rows that are higher than the deleted rows."""
 		for row in range(21, 0, -1):
 			if row < full_rows.max() - 1 and not row + 1 in full_rows:
 				for col in BOARD_WIDTH:
 					if board[row][col] == "[X]":
 						board[row][col] = "[ ]"
-						# catches exceptions where the lowest unfilled row is lower than the highest filled row
+						
+						"""Lowers unfilled rows that are between the highest filled and lowest filled row."""
 						if row == full_rows.max() - 2 or row == full_rows.max() - 3 and not row + 2 in full_rows:
 							board[row + 1][col] = "[X]"
 						elif row == full_rows.max() - 3 and full_rows.size() > 1:
 							board[row + 2][col] = "[X]"
 						else:
 							board[row + full_rows.size()][col] = "[X]"
-		# asks for the line count to be updated
+							
+		"""Tells the user interface to update the number of filled lines."""
 		user_interface.set_score(full_rows.size())

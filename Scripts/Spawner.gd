@@ -13,19 +13,21 @@ var last_shape: KinematicBody2D = null
 
 
 func _ready() -> void:
-	# makes new shapes truly random and asks the first shape to be spawned
+	"""Makes RNG truly random and tells the first shape to spawn."""
 	randomize()
 	spawn()
 
 
 func spawn() -> void:
-	# spawns new shapes
+	"""Moves the last spawned shape up by 100 pixels in the shape queue."""
 	if last_shape:
 		last_shape.position -= Vector2(0, 100)
-	# if the current shape is not the first shape, asks to activate the shape in the "next" box
+	
+	"""Activates the next shape in the shape queue."""
 	if not second_shape:
 		next_shape.activate()
-	# creates a random shape and places it in the "next" box
+	
+	"""Creates a new random shape and places it at the bottom of the shape queue."""
 	var shape := SHAPE.instance()
 	var new_shape := randi() % 7
 	add_child(shape)
@@ -36,10 +38,13 @@ func spawn() -> void:
 		shape.position = spawn_pos
 	next_shape = last_shape
 	last_shape = shape
-	# if the current shape is the first shape of the game, asks to spawn another shape
+	
+	"""Tells the function to spawn another shape if this is the first spawned shape."""
 	if first_shape:
 		first_shape = false
 		spawn()
+	
+		"""Tells the function to spawn another shape if this is the second spawned shape."""
 	elif second_shape:
 		second_shape = false
 		spawn()

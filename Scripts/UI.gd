@@ -1,6 +1,6 @@
 extends Control
 
-"""Controls the in-game user interface in the right sidebar."""
+"""Controls the user interface."""
 
 onready var fast_mode := $MarginContainer/VBoxContainer/LineTracker/FastLabel
 onready var invisible_mode := $MarginContainer/VBoxContainer/LineTracker/InvisibleLabel
@@ -22,7 +22,7 @@ var game_type := 1
 
 
 func _ready():
-	most_lines.text = "%04d" % Autoload.highscore
+	"""Finds the game mode and sets the appropriate high score."""
 	if Autoload.fast_mode:
 		game_type += 1
 		fast_mode.show()
@@ -31,9 +31,10 @@ func _ready():
 		invisible_mode.show()
 	most_lines.text = "%04d" % Autoload.highscore_dictionary[game_type]
 
+
 func _on_Pause_pressed() -> void:
+	"""Pauses and unpauses the game."""
 	if not pause.disabled:
-		# pauses the game when pressed for the first time, continues it when pressed for the second time
 		pause.disabled = true
 		if pause.texture_normal == PAUSE_IMG:
 			active_shape.active = false
@@ -45,12 +46,15 @@ func _on_Pause_pressed() -> void:
 			active_shape.active = true
 			active_shape.drop_timer.wait_time = Autoload.shape_drop_speed
 			active_shape.drop_timer.start()
-		# starts a two second timer between pause button clicks to prevent errors and spam clicking
+			
+		"""Starts a timer between pause button clicks to prevent errors, spam clicking, and keeping 
+		the shape in the same place for an indefinite amount of time which negates the difficulty 
+		created by the icreasing shape drop speed."""
 		pause_timer.start()
 
 
 func _on_PauseTimer_timeout() -> void:
-	# allows the pause button to be clicked again and changes its texture
+	"""Allows the pause button to be clicked again and changes its texture."""
 	pause.disabled = false
 	if pause.texture_normal == UNPAUSE_RED_IMG:
 		pause.texture_normal = UNPAUSE_IMG
@@ -59,11 +63,12 @@ func _on_PauseTimer_timeout() -> void:
 
 
 func _on_Restart_pressed() -> void:
+	"""Restarts the game."""
 	get_tree().change_scene("res://Scenes/Game.tscn")
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:
-	"""Calls the restart function when R is pressed and informs the player that the game is restarting."""
+	"""Pauses, restarts, and exits the game with keyboard input."""
 	if event.scancode == KEY_SPACE:
 		_on_Pause_pressed()
 	elif event.scancode == KEY_R and event.pressed:
@@ -73,23 +78,20 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 
 
 func _on_MainMenu_pressed() -> void:
-	# asks to check if a new highscore is reached and switches to the main menu scene
+	"""Returns to the main menu."""
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 
 func set_score(lines: int) -> void:
-	# updates the line counter and increases the shape drop speed by 0.01 sec per 10 lines
+	"""Updates the number of filled lines and changes the shape drop speed depending on the game mode."""
 	score += lines
 	if Autoload.shape_drop_speed != 0.04:
 		if Autoload.fast_mode:
-			Autoload.shape_drop_speed = 1.04 - score * 0.01
+			Autoload.shape_drop_speed = Autoload.DEFAULT_SHAPE_DROP_SPEED - score * 0.01
 		else:
-			Autoload.shape_drop_speed = 1.04 - floor(score / 10) * 0.01
+			Autoload.shape_drop_speed = Autoload.DEFAULT_SHAPE_DROP_SPEED - floor(score / 10) * 0.01
 	line_count.text = "%04d" % score
-	"""Updates the high score if the previous high score is beaten."""
-	if Autoload.highscore < score:
-		Autoload.highscore = score
-		most_lines.text = "%04d" % Autoload.highscore
+	
 	"""Updates the high score if the previous high score is beaten."""
 	if score > Autoload.highscore_dictionary[game_type]:
 		Autoload.highscore_dictionary[game_type] = score
@@ -97,6 +99,6 @@ func set_score(lines: int) -> void:
 
 
 func game_over() -> void:
-	# asks to check if a new highscore is reached, to show the game over label, and restarts the game after 5 sec
+	"""Disables the pause button and shows the game over label."""
 	pause.disabled = true
 	game_over.show()

@@ -10,7 +10,7 @@ var length := 22
 
 
 func _draw() -> void:
-	# draws the grid in-game
+	"""Draws the grid if it's turned on in the options menu."""
 	if Autoload.show_grid:
 		for x in range(width + 1):
 			var col_pos: int = x * Autoload.CELL_SIZE

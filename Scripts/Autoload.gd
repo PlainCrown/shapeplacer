@@ -1,12 +1,15 @@
 extends Node
 
-"""Adds and controls the background music player, and holds some variables used in other scripts."""
+"""Autoload script containing variables that are used across multiple different scripts.
+Responsible for saving and loading save files and user preferences.
+Also adds and controls the music audio player."""
 
 onready var music_file: Resource = preload("res://Assets/Sounds/music_track.ogg")
 onready var config_path = "user://config.ini"
 onready var save_path = "user://save.dat"
 
 const CELL_SIZE = 40
+const DEFAULT_SHAPE_DROP_SPEED = 1.04
 const DEFAULT_COLOR_DIC = {
 	0: Color(0.1, 0.91, 0.91, 1),
 	1: Color(0.1, 0.38, 0.91, 1),
@@ -17,9 +20,7 @@ const DEFAULT_COLOR_DIC = {
 	6: Color(0.91, 0.1, 0.24, 1)}
 
 var music_player := AudioStreamPlayer.new()
-var shape_drop_speed := 1.04
-var last_shape_pos := []
-var highscore := 0
+var shape_drop_speed := DEFAULT_SHAPE_DROP_SPEED
 
 """Variables saved to config.ini"""
 var music_volume: int setget music_volume_change
@@ -53,7 +54,7 @@ func _ready() -> void:
 	get_viewport().get_node("/root").call_deferred("add_child", music_player)
 	music_player.stream = music_file
 	music_player.volume_db = music_volume
-#	music_player.play()
+	music_player.play()
 
 
 func music_volume_change(value: int) -> void:

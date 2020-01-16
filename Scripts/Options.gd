@@ -66,10 +66,11 @@ func _on_InvisibleCheck_toggled(button_pressed: InputEventMouse) -> void:
 
 
 func _on_ShapeColorButton_pressed() -> void:
+	"""Opens the shape color menu."""
 	get_tree().change_scene("res://Scenes/ShapeColorMenu.tscn")
 
 
-func _on_BackButton_pressed():
+func _on_BackButton_pressed() -> void:
 	"""Exits the options menu when the back button is clicked."""
 	Autoload.save_config()
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")

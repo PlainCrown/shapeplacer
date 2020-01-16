@@ -1,6 +1,6 @@
 extends CollisionShape2D
 
-"""Changes the color of the blocks for each shape."""
+"""Changes the color of each block in the shape."""
 
 onready var block_sprite: Sprite = $BlockSprite
 
@@ -9,6 +9,6 @@ export (block_colors) var color setget change_color
 
 
 func change_color(new_color: int) -> void:
-	# sets a new block color depending on the shape
+	"""Sets the block color depending on the shape that the block is a part of."""
 	color = new_color
 	block_sprite.modulate = Autoload.color_dic[color]
