@@ -4,6 +4,13 @@ A short and simple game based on the classic tetris mechanics. Fill up lines to 
 
 This is a work in progress, but the newest playable version is available on [Itch.io](https://plaincrown.itch.io/) and [Game Jolt](https://gamejolt.com/@PlainCrown/games).
 
+# Features:
+
+* 7 shapes to place
+* 4 high scores to set
+* Fast shape drop mode
+* Invisible shape mode
+
 # Contributions:
 
 Anyone can contribute to ShapePlacer by playing the game and reporting any bugs they find in the comments section of the game page, or in the issues tab on GitHub. A good bug report should explain exactly how and when the bug occurred. It's difficult to fix a bug that cannot be re-created by following the same steps. Videos and screenshots also help.
